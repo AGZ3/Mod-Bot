@@ -3,11 +3,12 @@ import os
 
 links = [
     '.com', 
-    '.net', 
-    'www.', 
+    '.net',  
     '.ru', 
     '.io', 
-    '.org']
+    '.org',
+    '.en'
+    ]
 
 TOGGLE_STATE_PATH = os.path.join('data', 'toggle_state.json')
 PENDING_LINKS_PATH = os.path.join('data', 'pending_links.json')
