@@ -1,3 +1,5 @@
+# badwords_manager.py
+
 import json
 import os
 import re
