@@ -22,14 +22,14 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 # On ready event: print success message when bot connects
 async def on_ready():
     print(f"{bot.user} has connected to Discord!")
-
+    bot.cached_badwords = load_badwords()  # Initialize cache
 
 
 #### ON MESSAGE, CHECK FOR LINKS OR BLACKLISTED WORDS ####
     
 @bot.event
 async def on_message(message):
-    badwords = load_badwords()   
+    badwords = bot.cached_badwords   
     pending_links = load_pending_links()
 
     ctx = await bot.get_context(message)
@@ -170,8 +170,7 @@ async def link_approval(ctx, word=None):
 #### ADMIN ADD/REMOVE WORDS FROM BADWORDS LIST ####
 @bot.command()
 async def words(ctx, action=None, *, word=None):
-    
-    badwords = load_badwords()   
+    badwords = load_badwords()  # Load current list from file
 
     if action is None or word is None:
         await ctx.send('Missing arguments. Use !words [add/remove] [word]')
@@ -182,6 +181,7 @@ async def words(ctx, action=None, *, word=None):
             if word not in badwords:
                 badwords.append(word)
                 save_badwords(badwords)
+                bot.cached_badwords = load_badwords()  # Update cache
                 await ctx.send(f'Added "{word}" to the list of bad words.')
             else:
                 await ctx.send(f'Word "{word}" is already in the list.')
@@ -189,6 +189,7 @@ async def words(ctx, action=None, *, word=None):
             if word in badwords:
                 badwords.remove(word)
                 save_badwords(badwords)
+                bot.cached_badwords = load_badwords()  # Update cache
                 await ctx.send(f'Removed "{word}" from the list of bad words.')
             else:
                 await ctx.send(f'Word "{word}" is not in the list.')
