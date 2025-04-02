@@ -87,7 +87,7 @@ async def on_message(message):
                                 f"Hey {moderator}! It looks like your approval is needed for this message: \n{message.content}. "
                                 f"\nType '!approve {message.author.id}' to approve.")
                             print(f"DM sent to {moderator}.")
-                            print(f'moderator loop: {str(pending_links)}')
+                            print(f'Pending {moderator} Approval: {message.content}')
                             return
                         except Exception as e:
                             print(f"Could not DM {moderator} due to {e}")
@@ -136,33 +136,34 @@ async def approve(ctx, user_id: int):
                     await channel.send(f"{pending_links[user_id_str]['username']}: \n{pending_links[user_id_str]['link']} (Approved by {ctx.author.name})")
                     print (f"Link Approved by: {ctx.author.name}, {ctx.author.id}")
                     remove_pending_link(user_id_str)
-                    await ctx.send("Link approved and posted.")
+                    await ctx.send("✅ Link approved and posted.")
                 else:
-                    await ctx.send("Could not find the channel to post the approved link.")
+                    await ctx.send("❌ Could not find the channel.")
             else:
-                await ctx.send("Channel information not found.")
+                await ctx.send("❌ No pending link found for this user.")
 
         except Exception as e:
             await ctx.send(f"An error occurred: {e}")
     else:
         await ctx.send("No link found for approval.")
 
+#### LINK APPROVAL TOGGLE COMMAND ####
 @bot.command()
 async def link_approval(ctx, word=None):
     if word is None:
-        await ctx.send('Missing arguments. Use !toggle_link_approval [on/off]')
+        await ctx.send('Missing arguments. Use !link_approval [on/off]')
         return
     if ctx.message.author.guild_permissions.administrator:
         if word.lower() == "on":
             set_toggle_state(1)  # Turn on link approval
-            await ctx.send('Link Approval has been turned ON!')
+            await ctx.send('✅ Link Approval has been turned ON!')
             print("Link Approval has been turned ON")
         elif word.lower() == "off":
             set_toggle_state(0)  # Turn off link approval
             await ctx.send('Link Approval has been turned OFF!')
-            print("Link Approval has been turned OFF")
+            print("❌ Link Approval has been turned OFF")
         else:
-            await ctx.send('Invalid argument. Use !toggle_link_approval [on/off]')
+            await ctx.send('Invalid argument. Use !link_approval [on/off]')
     else:
         await ctx.send('You do not have the permission to use this command.')
 
