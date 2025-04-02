@@ -21,14 +21,8 @@ def save_badwords(badwords):
         json.dump({"badwords": badwords}, file, indent=4)
 
 def normalize_message(message):
-    """
-    Reduces repeated characters in words to a single character.
-    
-    Example:
-        Input:  "Heeeeellloooo wooorllddd"
-        Output: "Helo world"
-    """
-    # This regex replaces any character that repeats more than twice with a single instance
-    normalized_message = re.sub(r'(.)\1+', r'\1', message)
-    return normalized_message
+    # Convert to lowercase and remove non-alphanumeric characters
+    cleaned = re.sub(r'[^a-z0-9\s]', '', message.lower())
+    # Reduce repeated characters (e.g., "shiiit" → "shit")
+    return re.sub(r'(.)\1+', r'\1', cleaned)
 
