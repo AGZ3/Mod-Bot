@@ -33,8 +33,6 @@ discord-bot/
 │   └── badwords.json           # Stores the list of bad words
 |   └── whitelist.json          # Implementing Whitelist to allow words
 │
-├── .env                        # Environment variables (e.g., DISCORD_KEY)
-├── requirements.txt            # Python package dependencies
 └── README.md                   # This file
 ```
 ## Video Walkthrough
