@@ -1,2 +1,21 @@
 .env
 /data/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.env.local
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Build/distribution files
+*.egg-info/
+dist/
+build/
