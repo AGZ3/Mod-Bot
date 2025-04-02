@@ -19,7 +19,7 @@ The following **future** features are planned:
 ## Project Structure
 
 The project is organized into several key components:
-
+```
 discord-bot/
 │
 ├── src/                        # Source code directory
@@ -31,11 +31,12 @@ discord-bot/
 │   ├── toggle_state.json       # Stores the toggle state for link approval
 │   ├── pending_links.json      # Stores links pending approval
 │   └── badwords.json           # Stores the list of bad words
+|   └── whitelist.json          # Implementing Whitelist to allow words
 │
 ├── .env                        # Environment variables (e.g., DISCORD_KEY)
 ├── requirements.txt            # Python package dependencies
 └── README.md                   # This file
-
+```
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
