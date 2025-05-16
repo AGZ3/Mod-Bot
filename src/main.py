@@ -7,6 +7,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from link_manager import load_pending_links, save_pending_links, remove_pending_link, get_toggle_state, set_toggle_state, links
 from badwords_manager import load_badwords, save_badwords, normalize_message
+from discord.ext.commands import DefaultHelpCommand
 
 
 load_dotenv()
@@ -17,6 +18,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
+bot.remove_command('help')  
 
 @bot.event
 # On ready event: print success message when bot connects
@@ -197,6 +199,60 @@ async def words(ctx, action=None, *, word=None):
             await ctx.send('Invalid action. Use "add" to add a word or "remove" to remove a word.')
     else:
         await ctx.send('You do not have the permission to use this command.')
+
+#### HELP COMMAND ####
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(
+        title="🤖 Mobi Bot Commands",
+        description="Here are all available commands for Mobi the Moderator Bot",
+        color=discord.Color.blue()
+    )
+
+    # General Commands
+    embed.add_field(
+        name="📝 General Commands",
+        value="""
+        `!hello` - Say hello to Mobi
+        """,
+        inline=False
+    )
+
+    # Moderator Commands
+    embed.add_field(
+        name="🛡️ Moderator Commands",
+        value="""
+        `!approve <user_id>` - Approve a pending link from a user
+        """,
+        inline=False
+    )
+
+    # Admin Commands
+    embed.add_field(
+        name="⚡ Admin Commands",
+        value="""
+        `!words add <word>` - Add a word to the filter list
+        `!words remove <word>` - Remove a word from the filter list
+        `!link_approval on/off` - Toggle link approval system
+        """,
+        inline=False
+    )
+
+    # Bot Features
+    embed.add_field(
+        name="🔍 Automatic Features",
+        value="""
+        • Filters messages containing banned words
+        • Manages links based on approval settings
+        • Notifies moderators of pending links
+        """,
+        inline=False
+    )
+
+    # Footer
+    embed.set_footer(text="For more details about a command, use: !help <command>")
+    
+    await ctx.send(embed=embed)
 
 
 # Start bot
