@@ -1,8 +1,8 @@
 # Discord Admin Bot - *Mobi the Moderator*
 
-Submitted by: **Alec Gomez**
+Created by: **Alec Gomez**
 
-This web app: **Mobi Bot is a dedicated Discord bot designed to enhance moderation and community management within Discord servers. Built with Python, Mobi Bot offers automated content moderation, including link approval mechanisms and bad word filtering, to help maintain a safe and welcoming environment for all community members.**
+**Mobi Bot is a dedicated Discord bot designed to enhance moderation and community management within Discord servers. Built with Python, Mobi Bot offers automated content moderation, including link approval mechanisms and bad word filtering, to help maintain a safe and welcoming environment for all community members.**
 
 ## Features
 
@@ -14,7 +14,29 @@ The following **features** are completed:
 
 The following **future** features are planned:
 
-- [ ] 
+- [ ] **Whitelisting Links is a work in progress.**
+
+## Commands
+
+👋 Here are all the available commands for Mobi Bot:
+
+### 🌟 General Commands
+| Command | Description |
+|---------|-------------|
+| `!hello` | Say hello to Mobi! A friendly way to check if the bot is active |
+| `!help`  | Display all available commands and their descriptions |
+
+### 🛡️ Moderator Commands
+| Command | Description |
+|---------|-------------|
+| `!approve <user_id>` | Approve a pending link from a user. The original link will be reposted in the channel |
+
+### ⚡ Admin Commands
+| Command | Description |
+|---------|-------------|
+| `!words add <word>` | Add a word to the profanity filter list |
+| `!words remove <word>` | Remove a word from the profanity filter list |
+| `!link_approval on/off` | Toggle the link approval system on or off |
 
 ## Project Structure
 
@@ -35,6 +57,7 @@ discord-bot/
 │
 └── README.md                   # This file
 ```
+
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
@@ -42,6 +65,13 @@ Here's a walkthrough of implemented user stories:
 <img src='public\assets\walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with ezgif
+
+## 📝 Notes
+
+- The bot automatically filters messages containing banned words
+- Links are held for moderator approval when link approval is enabled
+- Moderators receive notifications when new links need approval
+- All settings and data are persistently stored in JSON files
 
 ## License
 
